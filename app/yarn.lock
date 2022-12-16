@@ -911,6 +911,11 @@ chrome-trace-event@^1.0.2:
   resolved "https://registry.yarnpkg.com/chrome-trace-event/-/chrome-trace-event-1.0.3.tgz#1015eced4741e15d06664a957dbbf50d041e26ac"
   integrity sha512-p3KULyQg4S7NIHixdwbGX+nFHkoBiA4YQmyWtjb8XngSKV124nJmRysgAeujbUVb15vh+RvFUfCPqU7rXk+hZg==
 
+classnames@^2.2.6:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
+  integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
+
 classnames@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
@@ -2325,6 +2330,14 @@ react-dom@^18.1.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.22.0"
+
+react-edit-text@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/react-edit-text/-/react-edit-text-5.0.2.tgz#e1418a16f615cc5b833f455ccffd24d18c566ab2"
+  integrity sha512-V3M4KhgQDbKa1I6F5OLrhqu9w/T4XONFEyC4RijdSxDs+L5srpsCH6V5CSWGNT6pu6f4VG03n736RB3lMCTUkw==
+  dependencies:
+    classnames "^2.2.6"
+    prop-types "^15.8.1"
 
 react-is@^16.13.1, react-is@^16.3.2:
   version "16.13.1"

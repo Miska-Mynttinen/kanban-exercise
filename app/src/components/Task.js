@@ -1,5 +1,7 @@
 import React from 'react';
 import {users} from '../api/mockData';
+import { EditText, EditTextarea } from 'react-edit-text';
+import 'react-edit-text/dist/index.css';
 
 export const Task = ({taskId, taskName, assigned, description, importance,}) => {
   let num = 0
@@ -22,29 +24,29 @@ export const Task = ({taskId, taskName, assigned, description, importance,}) => 
 
   return (
     <>
-        <div className="row mb-3">
-            <div className="col-2 example-grid-col">
-              {taskId}
-            </div>
-            <div className="col-2 example-grid-col">
-              {taskName}
-            </div>
-
-            <div className="col-3 example-grid-col">
-              {Object.values(assigned).map(person => 
-                  <div key={person + taskId}>
-                    {userList[userList.indexOf(person) + 1]}
-                  </div>
-                )}
-            </div>
-
-            <div className="col-3 example-grid-col">
-              {description}
-            </div>
-            <div className={`col-2 color-grid-col-${num}`}>
-              {importance}
-            </div>
+      <div className="row mb-3">
+        <div className="col-2 example-grid-col">
+          {taskId} 
         </div>
+        <div className="col-2 example-grid-col">
+          <EditText defaultValue={taskName} inline/>
+        </div>
+
+        <div className="col-3 example-grid-col">
+          {Object.values(assigned).map(person => 
+            <div key={person + taskId}>
+              <EditText defaultValue={userList[userList.indexOf(person) + 1]}inline/>
+            </div>
+          )}
+        </div>
+
+        <div className="col-3 example-grid-col">
+          <EditTextarea defaultValue={description} />
+        </div>
+        <div className={`col-2 color-grid-col-${num}`}>
+          <EditText defaultValue={String(importance)} inline/>
+        </div>
+      </div>
     </>
   )
 }
