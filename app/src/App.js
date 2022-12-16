@@ -7,6 +7,7 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 
 const App = () => {
@@ -71,19 +72,96 @@ const App = () => {
   }
 
 
+  const onDragEnd = (result, allColumns, setColumns) => {
+    console.log('result', result)
+    if (!result.destination) return;
+    const { source, destination } = result;
+    console.log('source', source)
+    console.log('destination', destination)
+    console.log('allColumns', allColumns)
+    console.log('allColumns.data', Object.values(allColumns.data))
+    let checkColumns = []
+    /*Object.values(allColumns.data).map(column =>
+      checkColumns.push(column)
+    )
+    console.log('checkColumns', checkColumns)*/
+
+    console.log('source.droppableId', source.droppableId)
+
+
+    if (source.droppableId !== destination.droppableId) {
+      const sourceColumn = allColumns[source.droppableId];
+      const destColumn = allColumns[destination.droppableId];
+      const sourceItems = [...sourceColumn.items];
+      const destItems = [...destColumn.items];
+      const [removed] = sourceItems.splice(source.index, 1);
+      destItems.splice(destination.index, 0, removed);
+
+      setColumns({
+        ...allColumns,
+        [source.droppableId]: {
+          ...sourceColumn,
+          items: sourceItems
+        },
+        [destination.droppableId]: {
+          ...destColumn,
+          items: destItems
+        }
+      });
+    } else {
+      const column = allColumns.data[source.droppableId];
+      console.log('column', column)
+      const copiedTasks = [...column.tasks];
+      //alla error
+      const [removed] = copiedTasks.splice(source.index, 1);
+      copiedTasks.splice(destination.index, 0, removed);
+      console.log('copiedTasks')
+      console.log('[removed]', [removed])
+      console.log('removed', removed)
+
+
+      setColumns({
+        ...allColumns,
+        data: {
+          ...allColumns.data,
+          [source.droppableId]: {
+            ...[source.droppableId],
+            tasks: copiedTasks
+          }
+        }
+      });
+    }
+  }
+
+  /*
+  ...allColumns,
+        data: {
+          ...source.droppableId,
+          tasks: copiedTasks*/
+
   return (
     <div className="container">
       {/*create your own containers and components*/}
       <Routes>
-        <Route path="/" element={<div><TopKanban/>{Object.values(allColumns).map(columns =>
-          <div key={columns}>
-            <Kanban columns={columns} />
-          </div>
-         )}</div>
-        }/>
+        <Route path="/" element={
+          <div>
+            <TopKanban/>
+            <DragDropContext
+              onDragEnd={(result) => onDragEnd(result, allColumns, setColumns)}
+            >
+              {Object.values(allColumns).map(columns =>
+                <div key={columns}>
+                  <Kanban columns={columns} />
+                </div>
+              )} 
+            </DragDropContext>
+         </div>
+          }
+        />
       </Routes>
     </div>
   );
 }
 
 export default App;
+
