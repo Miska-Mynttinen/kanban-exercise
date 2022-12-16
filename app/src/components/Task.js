@@ -4,6 +4,7 @@ import { EditText, EditTextarea } from 'react-edit-text';
 import 'react-edit-text/dist/index.css';
 
 export const Task = ({taskId, taskName, assigned, description, importance,}) => {
+  //change color based on importance in the importance grid box
   let num = 0
   if (importance === 0) {
     num = 0

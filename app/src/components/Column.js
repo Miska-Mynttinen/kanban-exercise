@@ -2,10 +2,10 @@ import React from 'react';
 import {Tasks} from './Tasks';
 import { Droppable } from 'react-beautiful-dnd';
 
-
 export const Column = ({column, columnIndex}) => {
-  console.log('kanban column', column)
-  console.log('columnIndex1', columnIndex)
+  //Make columns the place where draggable task can be dropped to.
+  //Indexing columns with indexes from 0 upwards.
+  //Get tasks from column and pass to Tasks component.
   return (
     <>
       <Droppable droppableId={String(columnIndex)}>
@@ -14,7 +14,7 @@ export const Column = ({column, columnIndex}) => {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <Tasks tasks={column["tasks"]} columnIndex={columnIndex} />
+            <Tasks tasks={column["tasks"]} />
             {provided.placeholder}
           </div>
         )}
@@ -23,5 +23,3 @@ export const Column = ({column, columnIndex}) => {
     </>
   )
 }
-
-//column["id"]

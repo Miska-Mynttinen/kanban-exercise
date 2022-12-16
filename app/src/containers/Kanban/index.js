@@ -4,7 +4,8 @@ import {TopRow} from '../../components/TopRow';
 
 
 const Kanban = ({columns}) => {
-  console.log('kanban columns', columns)
+  //Add top row with static information about the column on top of columns.
+  //Pass columns as singular columns to Column component.
   return (
     <>
       {Object.values(columns).map((column, columnIndex) =>
