@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import BoardAPI from './api/board';
 import UserAPI from './api/user';
-import Example1 from './containers/Example1';
-import Example2 from './containers/Example2';
+import Kanban from './containers/Kanban';
+import TopKanban from './containers/TopKanban';
 import {
   Routes,
   Route
@@ -10,7 +10,7 @@ import {
 
 
 const App = () => {
-
+  /*
   //this function is for showing the available mocked Rest API,
   //remove this function when starting the exercise
   const exampleOfMockAPI = async () => {
@@ -54,14 +54,33 @@ const App = () => {
 
   useEffect(() => {
     exampleOfMockAPI();
+  }, [])*/
+
+
+  const [allColumns, setColumns] = useState([])
+
+  useEffect(() => {
+    mockAPI();
   }, [])
+
+  const mockAPI = async () => {
+    await BoardAPI.getBoardColumns()
+                  .then(res => {
+                    setColumns(res)
+                  })
+  }
+
 
   return (
     <div className="container">
       {/*create your own containers and components*/}
       <Routes>
-        <Route path="/" element={<Example1 />}/>
-        <Route path="/example2" element={<Example2 />} />
+        <Route path="/" element={<div><TopKanban/>{Object.values(allColumns).map(columns =>
+          <div key={columns}>
+            <Kanban columns={columns} />
+          </div>
+         )}</div>
+        }/>
       </Routes>
     </div>
   );
