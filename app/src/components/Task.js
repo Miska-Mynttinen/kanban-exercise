@@ -25,7 +25,7 @@ export const Task = ({taskId, taskName, assigned, description, importance,}) => 
 
   return (
     <>
-      <div className="row mb-3">
+      <div style={{backgroundColor: 'white'}} className="row mb-0">
         <div className="col-2 example-grid-col">
           {taskId} 
         </div>
