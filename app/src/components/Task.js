@@ -17,8 +17,8 @@ export const Task = ({taskId, taskName, assigned, description, importance,}) => 
   //Flattens all user data to an array on single values. 
   //First the id of the user then the next index is the name of the user.
   let userList = []
-  Object.values(users).map(user =>
-    Object.values(user).map(u =>
+  Object.values(users).forEach(user =>
+    Object.values(user).forEach(u =>
       userList.push(u)
     )
   )
